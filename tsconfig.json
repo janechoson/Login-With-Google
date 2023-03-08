@@ -1,0 +1,45 @@
+{
+  "compilerOptions": {
+    "target": "esnext",
+    "useDefineForClassFields": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "strict": true,
+    "jsx": "preserve",
+    "sourceMap": true,
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "lib": ["esnext", "dom"],
+    "types": [
+      "node",
+      "vite/client",
+      "vite-plugin-vue-layouts/client",
+      "vite-plugin-pages/client"
+    ],
+    "paths": {
+      "@/*": ["./src/*"]
+    }
+  },
+  //Cấu hình đường dẫn vào file .ts
+  "include": ["src/**/*.ts", "src/**/*.vue"],
+  "exclude": ["node_modules"],
+  "references": [{ "path": "./tsconfig.node.json" }]
+}
+// Các tùy chọn cấu hình trong tệp bao gồm:
+// "compilerOptions": Đây là nơi bạn cấu hình các tùy chọn liên quan đến trình biên dịch TypeScript.
+// "target": Phiên bản ECMAScript mà mã của bạn sẽ được biên dịch thành.
+// "module": Loại module sẽ được sử dụng.
+// "strict": Sử dụng chế độ nghiêm ngặt của TypeScript.
+// "jsx": Loại cú pháp JSX sẽ được sử dụng.
+// "sourceMap": Có tạo bản đồ nguồn hay không.
+// "resolveJsonModule": Có cho phép tải các tệp JSON hay không.
+// "esModuleInterop": Có cho phép sử dụng các module không dùng ES6.
+// "allowSyntheticDefaultImports": Có cho phép sử dụng các import mặc định ảo.
+// "moduleResolution": Cách giải quyết các module.
+// "baseUrl": Đường dẫn cơ sở cho các import tương đối.
+// "paths": Định nghĩa các đường dẫn alias cho các import tương đối.
+// "types": Các tệp khai báo kiểu để sử dụng.
+// "typeRoots": Thư mục chứa các tệp khai báo kiểu.
+// "include": Các tệp cần được bao gồm trong quá trình biên dịch.
+// "exclude": Các tệp bị loại trừ khỏi quá trình biên dịch.
