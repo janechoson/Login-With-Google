@@ -20,7 +20,7 @@ router.beforeEach(async (to, from, next) => {
   }
 
   if (!router.options.routes.map((route) => route.path).includes(to.path)) {
-    next({ name: "ContractSearch" });
+    next({ name: "new_feed" });
   }
 
   if ((to.meta?.requiresAuth && !loggedIn) || !user) {

@@ -105,8 +105,12 @@ export const RULES = {
     (/^[a-zA-Z0-9]*$/.test(value) && Promise.resolve()) ||
     Promise.reject("英数字で入力して下さい。"),
 
-  email: (v: string): RuleResult =>
-    /.+@.+\..+/.test(v) || "正しいメールアドレスを入力してください。",
+  email: (rule: unknown, v: string): RuleResult =>
+    (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v) && Promise.resolve()) ||
+    Promise.reject("正しいメールアドレスを入力してください。"),
+
+  // email: (v: string): RuleResult =>
+  //   /.+@.+\..+/.test(v) || "正しいメールアドレスを入力してください。",
   emailNullable: (v: string): RuleResult =>
     (v || "").length === 0 ||
     /.+@.+\..+/.test(v) ||

@@ -2,10 +2,11 @@ import { defineStore } from "pinia";
 import { getToken, getMe } from "@/services/auth/index";
 import { setCookie, getCookie, eraseCookie } from "@/plugins/cookies";
 import { ref } from "vue";
+import { useRouter } from "vue-router";
 
 export const useAuthStore = defineStore("authStore", () => {
   const user = ref({});
-
+  const router = useRouter();
   const loggedIn = ref<boolean>(
     getCookie("loggedIn") && getCookie("loggedIn") !== "false" ? true : false
   );
@@ -35,7 +36,6 @@ export const useAuthStore = defineStore("authStore", () => {
       const data = await getMe();
       if (data) {
         setCookie("userId", data.user_id, 1);
-        setCookie("roleType", data.role_type_cd, 1);
         user.value = data;
         loggedIn.value = true;
         setCookie("loggedIn", true, 1);
@@ -54,6 +54,7 @@ export const useAuthStore = defineStore("authStore", () => {
   // và lưu giá trị false vào cookie loggedIn, và đặt giá trị của biến user thành một đối tượng trống.
 
   const logout = () => {
+    router.push("/sign_in");
     loggedIn.value = false;
     setCookie("loggedIn", String(false), 1);
     eraseCookie("token");

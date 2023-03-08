@@ -3,19 +3,34 @@
     <div class="form-login-container">
       <div class="form-login">
         <section>
-          <a-input
-            class="form-input"
-            v-model:value="form_login.user_name"
-            placeholder="Email or number phone"
-          />
+          <a-form :model="form_login">
+            <a-form-item
+              class="form-item"
+              :name="['user_name']"
+              :rules="[{ validator: rules.email, trigger: 'change' }]"
+            >
+              <a-input
+                class="form-input"
+                v-model:value="form_login.user_name"
+                placeholder="Email or number phone"
+            /></a-form-item>
+          </a-form>
         </section>
 
         <section>
-          <a-input
-            class="form-input"
-            v-model:value="form_login.user_password"
-            placeholder="Password"
-          />
+          <a-form :model="form_login">
+            <a-form-item
+              class="form-item"
+              :name="['user_password']"
+              :rules="[{ validator: rules.required, trigger: 'change' }]"
+            >
+              <a-input
+                class="form-input"
+                v-model:value="form_login.user_password"
+                placeholder="Password"
+                type="password"
+            /></a-form-item>
+          </a-form>
         </section>
 
         <section class="form-bt-login">
@@ -25,7 +40,11 @@
         </section>
 
         <section>
-          <a-checkbox v-model:checked="isCheckRemember">Remember me</a-checkbox>
+          <a-checkbox
+            v-model:checked="isCheckRemember"
+            @change="handleRemember(form_login)"
+            >Remember me</a-checkbox
+          >
         </section>
 
         <section class="login-orther">
@@ -51,8 +70,9 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from "vue";
+import { defineComponent, ref, onMounted } from "vue";
 import { useRouter } from "vue-router";
+import { RULES } from "@/services/contants/rules";
 
 interface FormLogin {
   user_name: string;
@@ -61,13 +81,26 @@ interface FormLogin {
 export default defineComponent({
   name: "Login",
   setup() {
-    const form_login = ref<FormLogin>({
+    const form_login = ref<any>({
       user_name: "",
       user_password: "",
     });
 
     const isCheckRemember = ref<boolean>(false);
     const router = useRouter();
+
+    /*
+     * handle Remember me
+     */
+    const handleRemember = (form: FormLogin) => {
+      if (isCheckRemember.value) {
+        localStorage.setItem("user_name", form.user_name);
+        localStorage.setItem("user_password", form.user_password);
+      } else {
+        localStorage.removeItem("user_name");
+        localStorage.removeItem("user_password");
+      }
+    };
 
     /*
      * handle Login
@@ -77,15 +110,28 @@ export default defineComponent({
       router.push("/new_feed");
     };
 
+    /*
+     * handle Sign Up
+     */
     const handleSignUp = () => {
       router.push("/register");
     };
+
+    onMounted(() => {
+      if (localStorage.getItem("user_name")) {
+        isCheckRemember.value = true;
+        form_login.value.user_name = localStorage.getItem("user_name");
+        form_login.value.user_password = localStorage.getItem("user_password");
+      }
+    });
 
     return {
       form_login,
       isCheckRemember,
       handleSignUp,
       handleSubmitLogin,
+      handleRemember,
+      rules: RULES,
     };
   },
 });
@@ -158,5 +204,9 @@ export default defineComponent({
       }
     }
   }
+}
+
+.form-item {
+  margin: 0px;
 }
 </style>
