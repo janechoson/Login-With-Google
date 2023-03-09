@@ -44,7 +44,6 @@ interface ListData {
 }
 
 export default defineComponent({
-  auth: true,
   components: {
     Icon,
   },
@@ -120,8 +119,6 @@ meta:
     "path": '/new_feed',
     "meta": {
       "requiresAuth": true
-      "title": "new_feed"
-      "layout": guest-layout
     }
   }
   </route>

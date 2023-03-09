@@ -62,6 +62,59 @@
         <a-button class="bt-sign-up" @click="handleSignUp">Sign Up</a-button>
       </section>
     </div>
+
+    <a-modal
+      class="modal-signup"
+      v-model:visible="isModalSignUp"
+      title="Đăng Ký"
+      :footer="null"
+      :closable="false"
+    >
+      <div class="modal-form-content">
+        <div>
+          <a-form class="form-content-1"
+            ><a-form-item class="form-content-item-name"
+              ><a-input class="form-content-item-input" placeholder="Họ"
+            /></a-form-item>
+            <a-form-item class="form-content-item"
+              ><a-input
+                class="form-content-item-input"
+                placeholder="Tên" /></a-form-item
+          ></a-form>
+
+          <a-form
+            ><a-form-item class="form-content-item"
+              ><a-input
+                class="form-content-item-input"
+                placeholder="Số điện thoại hoặc Email"
+            /></a-form-item>
+            <a-form-item class="form-content-item"
+              ><a-input
+                class="form-content-item-input"
+                type="password"
+                placeholder="Mật Khẩu" /></a-form-item
+          ></a-form>
+
+          <h1 class="text-description">Ngày sinh</h1>
+          <a-form class="form-content-characteristic">
+            <a-form-item class="form-content-item"><a-input /></a-form-item>
+            <a-form-item class="form-content-item"><a-input /></a-form-item>
+            <a-form-item class="form-content-item"><a-input /></a-form-item
+          ></a-form>
+
+          <h1 class="text-description">Giới tính</h1>
+          <a-form class="form-content-characteristic"
+            ><a-form-item class="form-content-item"><a-input /></a-form-item>
+            <a-form-item class="form-content-item"><a-input /></a-form-item>
+            <a-form-item class="form-content-item"><a-input /></a-form-item
+          ></a-form>
+        </div>
+      </div>
+
+      <div class="form-bt-signup">
+        <a-button class="bt-sign-up">Đăng ký</a-button>
+      </div>
+    </a-modal>
   </main>
 </template>
 
@@ -92,6 +145,7 @@ export default defineComponent({
     const isCheckRemember = ref<boolean>(false);
     const router = useRouter();
     const authStore = useAuthStore();
+    const isModalSignUp = ref<boolean>(false);
 
     /*
      * handle Remember me
@@ -132,7 +186,7 @@ export default defineComponent({
      * handle Sign Up
      */
     const handleSignUp = () => {
-      router.push("/register");
+      isModalSignUp.value = true;
     };
 
     onMounted(() => {
@@ -145,6 +199,7 @@ export default defineComponent({
 
     return {
       form_login,
+      isModalSignUp,
       isCheckRemember,
       handleSignUp,
       handleSubmitLogin,
@@ -215,7 +270,57 @@ export default defineComponent({
   }
 }
 
+.modal-signup {
+  .modal-form-content {
+    .form-content-1 {
+      display: flex;
+    }
+    .form-content-characteristic {
+      display: flex;
+    }
+  }
+  .form-bt-signup {
+    display: flex;
+    justify-content: center;
+    .bt-sign-up {
+      width: 60%;
+      height: 50px;
+      color: #fff;
+      font-size: 18px;
+      border-radius: 5px;
+      background-color: #42b72a;
+    }
+  }
+}
+
+.form-content-item-input {
+  border-radius: 5px;
+  height: 40px;
+  width: 100%;
+}
+
+.form-content-item {
+  margin-bottom: 20px;
+}
+
+.form-content-item-name {
+  margin-bottom: 20px;
+  margin-right: 10px;
+}
+
 .form-item {
   margin: 0px;
+}
+
+.text-description {
+  margin-bottom: 0px;
+  font-size: 12px;
+}
+</style>
+
+<style>
+.ant-modal-content {
+  width: 450px;
+  height: 550px;
 }
 </style>
