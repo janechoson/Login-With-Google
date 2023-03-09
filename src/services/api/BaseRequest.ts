@@ -90,12 +90,6 @@ export default class BaseRequest {
     return resolve(res.body.data);
   }
   _errorHandler(reject: any, err: any) {
-    if (err.response.data.message === "ERROR_RCINA") {
-      const { logout } = useAuthStore();
-      const router = useRouter();
-      logout();
-      router.push("/login");
-    }
     if (err.response && err.response.status === 401) {
       // TODO:
     }

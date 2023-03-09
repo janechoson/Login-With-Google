@@ -44,6 +44,7 @@ interface ListData {
 }
 
 export default defineComponent({
+  auth: true,
   components: {
     Icon,
   },
@@ -107,8 +108,20 @@ export default defineComponent({
 }
 </style>
 
-<route lang="yaml">
+<!-- <route lang="yaml">
 meta:
   title: "new_feed"
   layout: guest-layout
-</route>
+</route> -->
+
+<route>
+  {
+    "name": "NewFeed",
+    "path": '/new_feed',
+    "meta": {
+      "requiresAuth": true
+      "title": "new_feed"
+      "layout": guest-layout
+    }
+  }
+  </route>

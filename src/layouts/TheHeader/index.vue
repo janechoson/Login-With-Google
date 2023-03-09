@@ -1,21 +1,7 @@
 <template>
   <div class="header">
     <div class="header-form">
-      <div class="header-form-text">
-        <h1>{{ useMenu.currentLabelGroup }}</h1>
-        <h1>{{ useMenu.currentLabelRouter }}</h1>
-        <p class="ncb">NCB Reporing Tool</p>
-      </div>
-
       <div class="header-actions">
-        <div class="header-actions-from">
-          <img
-            class="header-actions-from-img"
-            src="../../assets/logo_bmwgroup_s.png"
-          />
-          <p>{{ userId }}</p>
-        </div>
-
         <a href="#" @click.prevent="signOutNow()">
           <img class="icon-logout" src="../../assets/logout.png" />
         </a>
@@ -27,18 +13,15 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import { useMenuStore } from "../stores/menu";
-import { useRouter } from "vue-router";
 import { getCookie } from "@/plugins/cookies";
 import { useAuthStore } from "@/stores/auth";
 const useMenu = useMenuStore();
 export default defineComponent({
   setup() {
     const userId = getCookie("userId");
-    const router = useRouter();
     const user = useAuthStore();
     const signOutNow = () => {
       user.logout();
-      router.push("/login");
     };
     return { useMenu, signOutNow, userId };
   },

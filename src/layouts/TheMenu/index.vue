@@ -56,26 +56,25 @@
 import { defineComponent, watch, onMounted, ref } from "vue";
 import { useMenuStore } from "../../layouts/stores/menu";
 import { useRoute } from "vue-router";
-import { getMessage } from "@/services/auth/index";
 import { getCookie } from "@/plugins/cookies";
 
 const contracts = [
   {
     key: "1",
-    group: "契約管理機能",
-    title: "契約検索",
+    group: "",
+    title: "",
     route: "/contract_search",
   },
   {
     key: "2",
-    group: "契約管理機能",
-    title: "登録更新結果",
+    group: "",
+    title: "",
     route: "/contract_regist",
   },
   {
     key: "3",
-    group: "契約管理機能",
-    title: "ウォッチ契約管理",
+    group: "",
+    title: "",
     route: "/contract_watch",
   },
 ];
@@ -83,20 +82,20 @@ const contracts = [
 const logs = [
   {
     key: "4",
-    group: "ログ機能",
-    title: "バッチログ",
+    group: "",
+    title: "",
     route: "/log_batch",
   },
   {
     key: "5",
-    group: "ログ機能",
-    title: "操作ログ",
+    group: "",
+    title: "",
     route: "/log_operation",
   },
   {
     key: "6",
-    group: "ログ機能",
-    title: "月次チェック",
+    group: "",
+    title: "",
     route: "/log_check",
   },
 ];
@@ -104,8 +103,8 @@ const logs = [
 const manage = [
   {
     key: "7",
-    group: "管理者機能",
-    title: "ユーザー管理",
+    group: "",
+    title: "",
     route: "/manage_user",
   },
 ];
@@ -113,27 +112,27 @@ const manage = [
 const guardroute = [
   {
     key: "8",
-    group: "契約管理機能",
-    title: "契約詳細・変更",
+    group: "",
+    title: "",
     route: "/contract_search_report/:id",
   },
   {
     key: "9",
-    group: "管理者機能",
-    title: "ユーザー登録",
+    group: "",
+    title: "",
     route: "/manage_user_regist",
   },
   {
     key: "10",
-    group: "契約管理機能",
-    title: "ウォッチリスト管理",
+    group: "",
+    title: "",
     route: "/contract_watch_list",
   },
 
   {
     key: "11",
-    group: "管理者機能",
-    title: "ユーザー更新",
+    group: "",
+    title: "",
     route: "/manage_user_update/:id",
   },
 ];
@@ -141,8 +140,8 @@ const guardroute = [
 const encrypt = [
   {
     key: "12",
-    group: "その他機能",
-    title: "暗号化・復号化",
+    group: "",
+    title: "",
     route: "/encrypt_decrypt",
   },
 ];

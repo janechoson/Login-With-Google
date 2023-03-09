@@ -20,15 +20,16 @@ router.beforeEach(async (to, from, next) => {
   }
 
   if (!router.options.routes.map((route) => route.path).includes(to.path)) {
-    next({ name: "new_feed" });
+    return next({ name: "new_feed" });
   }
 
   if ((to.meta?.requiresAuth && !loggedIn) || !user) {
-    next({ name: "login" });
+    return next({ name: "sign_in" });
   } else next();
-  next();
+  return next();
 });
 
+export default router;
 // createRouter: Hàm để tạo một router Vue mới.
 // createWebHistory: Lớp để tạo một router history dựa trên API của trình duyệt.
 // START_LOCATION: Một biến hằng chứa thông tin về địa chỉ URL khi ứng dụng được khởi động.

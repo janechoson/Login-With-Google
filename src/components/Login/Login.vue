@@ -48,15 +48,11 @@
         </section>
 
         <section class="login-orther">
-          <h1>Sign in with</h1>
-
-          <a-button class="bt-google">
-            <img
-              src="../../assets/images/google-logo.png"
-              class="logo-google"
-            />
-            <label> Google</label></a-button
-          >
+          <GoogleSignInButton
+            class="bt-google"
+            @success="handleLoginSuccess"
+            @error="handleLoginError"
+          ></GoogleSignInButton>
         </section>
       </div>
     </div>
@@ -73,6 +69,12 @@
 import { defineComponent, ref, onMounted } from "vue";
 import { useRouter } from "vue-router";
 import { RULES } from "@/services/contants/rules";
+import {
+  GoogleSignInButton,
+  type CredentialResponse,
+} from "vue3-google-signin";
+import { useAuthStore } from "@/stores/auth";
+import { getCookie } from "@/plugins/cookies";
 
 interface FormLogin {
   user_name: string;
@@ -80,6 +82,7 @@ interface FormLogin {
 }
 export default defineComponent({
   name: "Login",
+  // components: { GoogleSignInButton },
   setup() {
     const form_login = ref<any>({
       user_name: "",
@@ -88,6 +91,7 @@ export default defineComponent({
 
     const isCheckRemember = ref<boolean>(false);
     const router = useRouter();
+    const authStore = useAuthStore();
 
     /*
      * handle Remember me
@@ -111,6 +115,20 @@ export default defineComponent({
     };
 
     /*
+     * Sign with Google
+     */
+    const handleLoginSuccess = async (response: CredentialResponse) => {
+      const { credential } = response;
+      await authStore.loginGoogle(credential);
+      if (getCookie("loggedIn") === "true") {
+        return router.push("/new_feed");
+      }
+    };
+    const handleLoginError = async () => {
+      console.log("error");
+    };
+
+    /*
      * handle Sign Up
      */
     const handleSignUp = () => {
@@ -131,6 +149,8 @@ export default defineComponent({
       handleSignUp,
       handleSubmitLogin,
       handleRemember,
+      handleLoginSuccess,
+      handleLoginError,
       rules: RULES,
     };
   },
@@ -176,17 +196,6 @@ export default defineComponent({
       border: 1px solid #dadde1;
       border-radius: 5px;
       margin-top: 10px;
-      h1 {
-        font-size: 16px;
-        font-weight: 600;
-      }
-      .bt-google {
-        height: 40px;
-        width: 140px;
-        .logo-google {
-          height: 30px;
-        }
-      }
     }
   }
 
