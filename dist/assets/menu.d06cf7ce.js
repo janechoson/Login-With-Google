@@ -1,0 +1,1 @@
+import{aN as r}from"./index.83820bf7.js";const u=r("menu",{state:()=>({currentLabelRouter:"",currentLabelGroup:""}),actions:{updateCurrentRouter(e){this.currentLabelRouter=e,this.currentLabelGroup=e}}});export{u};
