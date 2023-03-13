@@ -1,0 +1,1 @@
+import{aN as r}from"./index.ea985de1.js";const u=r("menu",{state:()=>({currentLabelRouter:"",currentLabelGroup:""}),actions:{updateCurrentRouter(e){this.currentLabelRouter=e,this.currentLabelGroup=e}}});export{u};
