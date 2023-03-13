@@ -1,9 +1,0 @@
-{
-  "compilerOptions": {
-    "composite": true,
-    "module": "esnext",
-    "moduleResolution": "node"
-  },
-  //cấu hình đường dẫn đi vào file ts
-  "include": ["vite.config.ts"]
-}
