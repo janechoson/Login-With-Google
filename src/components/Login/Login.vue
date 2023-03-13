@@ -10,8 +10,8 @@
               :rules="[{ validator: rules.email, trigger: 'change' }]"
             >
               <a-input
-                class="form-input"
                 v-model:value="form_login.user_name"
+                class="form-input"
                 placeholder="Email or number phone"
             /></a-form-item>
           </a-form>
@@ -25,8 +25,8 @@
               :rules="[{ validator: rules.required, trigger: 'change' }]"
             >
               <a-input
-                class="form-input"
                 v-model:value="form_login.user_password"
+                class="form-input"
                 placeholder="Password"
                 type="password"
             /></a-form-item>
@@ -64,8 +64,8 @@
     </div>
 
     <a-modal
-      class="modal-signup"
       v-model:visible="isModalSignUp"
+      class="modal-signup"
       title="Đăng Ký"
       :footer="null"
       :closable="false"

@@ -1,19 +1,16 @@
 <template>
   <div class="system-layout">
     <TheHeader class="the-header"></TheHeader>
-    <div class="the-main">
-      <TheMenu class="the-menu"></TheMenu>
-      <div class="the-content">
-        <router-view />
-      </div>
+    <div class="marquee_wrapper">
+      <p class="marquee">text running</p>
     </div>
+    <router-view />
     <TheFooter></TheFooter>
   </div>
 </template>
 
 <script setup lang="ts">
 import TheHeader from "./TheHeader/index.vue";
-import TheMenu from "./TheMenu/index.vue";
 import TheFooter from "./TheFooter/index.vue";
 </script>
 
@@ -21,34 +18,33 @@ import TheFooter from "./TheFooter/index.vue";
 .system-layout {
   height: 100%;
   width: 100%;
-
-  .the-main {
-    height: 100%;
-    display: flex;
-    width: 100%;
-    padding-top: 20px;
+  @keyframes marquee {
+    0% {
+      margin-left: 100%;
+      transform: translateX(0%);
+    }
+    100% {
+      margin-left: 0;
+      transform: translateX(-100%);
+    }
   }
 
-  .the-content {
-    width: calc(100% - 300px);
-    padding: 0 20px 0 10px;
-    margin: 0;
-  }
-  .the-menu {
-    width: 300px;
-    padding: 0 20px;
-    box-sizing: none !important;
-  }
-
-  *:not(.the-menu) {
-    box-sizing: border-box;
-  }
-
-  .ant-menu-item-only-child {
-    padding-left: 20px !important;
-  }
-  .ant-menu-submenu-title {
-    padding-left: 10px !important;
+  .marquee_wrapper {
+    overflow: hidden;
+    background-color: #fcf7ef;
+    margin-top: -1rem;
+    .marquee {
+      animation: marquee 10s linear infinite;
+      display: inline-block;
+      white-space: nowrap;
+      height: 5rem;
+      font-weight: 400;
+      font-size: 14px;
+      font-style: italic;
+      line-height: 5rem;
+      color: var(--primary-color);
+      margin-bottom: 0;
+    }
   }
 }
 </style>

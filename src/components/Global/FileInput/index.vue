@@ -10,8 +10,8 @@
     <a-button class="input-info">
       {{ nameFile ? nameFile : "Click to Upload" }}
       <DeleteOutlined
-        @click.stop
         v-if="nameFile"
+        @click.stop
         @click.prevent="removeFile()"
       />
     </a-button>
@@ -73,7 +73,7 @@ export default defineComponent({
     const nameFile = computed(() =>
       // @ts-nocheck
       // @ts-ignore
-      typeof imageUrl === "object" ? imageUrl.value?.name : ""
+      typeof imageUrl.value === "object" ? imageUrl.value?.name : ""
     );
     /**
      * removeFile

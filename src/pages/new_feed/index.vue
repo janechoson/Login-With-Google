@@ -44,10 +44,10 @@ interface ListData {
 }
 
 export default defineComponent({
+  name: "NewFeed",
   components: {
     Icon,
   },
-  name: "NewFeed",
   setup() {
     const list_data = ref<ListData[]>([
       { id: "2", title: "ABC", description: "2", heart: false },
