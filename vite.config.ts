@@ -29,7 +29,6 @@ export default defineConfig(({ mode }) => {
         "@/": `${resolve(__dirname, "src")}/`,
       },
     },
-    base: "Login-With-Google",
     //import các plugins sử dụng trong project
     plugins: [
       vue(),
